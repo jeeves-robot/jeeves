@@ -1,8 +1,9 @@
 var video = document.getElementById('camera');
 
-
+// Temporary hack, set to roomba computer.
+// Robot does not have rossserver.
 var ros = new ROSLIB.Ros({
-    url : 'ws://localhost:9090'
+    url : 'ws://roomba.cs.washington.edu:9090'
 });
 
 ros.on('connection', function() {
@@ -31,5 +32,5 @@ QCodeDecoder().decodeFromCamera(video, function(er,res){
         location: location,
         food_type: foodType
     });
-    qr_code_topic.publish(order)
+    qr_code_topic.publish(order);
 });
