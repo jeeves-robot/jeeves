@@ -19,23 +19,19 @@
   <body>
    
     <div class="container">
+      <div class="header">
+       <h3 class="text-muted">jeeves</h3>
+      </div>
 
       <div class="jumbotron">
-        <h1> Welcome! </h1>
-        <h2> Select a user group </h2>
-        </br>
-        <button class="btn btn-lg btn-success"><a href="order.html">User</a></button>
-        
-        </br>
-        </br>
+        <h1>Scan your QR code!</h1>
+        <div class="sample grid__col--2">
+          <video id="camera" width="500" height="480" src="" autoplay></video>
+          <p>
+          <button class="btn btn-lg btn-success">Capture</button>
+          </p>
+        </div>
 
-        <button class="btn btn-lg btn-success"><a
-                href='restaurant.html'>Restaurant Owner</a></button>
-
-        </br>
-        </br>
-
-        <button class="btn btn-lg btn-success"><a href="order.html">Delivery</a></button>
       </div>
     </div>
 
@@ -60,6 +56,15 @@
         <script src="bower_components/bootstrap/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
+        <script
+        src="scripts/qcode_decoder/build/qcode-decoder.min.js">
+        </script>
+        <script src="scripts/QRcapture.js"></script>
+        <script type="text/javascript"
+                src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript"
+                  src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+     
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
