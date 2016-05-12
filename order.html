@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Jeeves</title>
+    <title>jeeves</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -19,40 +19,48 @@
   <body>
    
     <div class="container">
-
-      <div class="jumbotron">
-        <h1> Welcome! </h1>
-        <h2> Select a user group </h2>
-        </br>
-        <button class="btn btn-lg btn-success">
-          <a href="order.html">User</a>
-        </button>
-        
-        </br>
-        </br>
-
-        <button class="btn btn-lg btn-success">
-          <a href='restaurant.html'>Restaurant Owner</a>
-        </button>
-
-        </br>
-        </br>
-        
-        <button class="btn btn-lg btn-success">
-          <a href="delivery.html">Delivery</a>
-        </button>
+      <div class="header">
+       <h3 class="text-muted">Jeeves</h3>
       </div>
+
+      <form action="">
+        <fieldset class="form-group">
+          <label for="exampleInputEmail1">First and Last name</label>
+          <input class="form-control" id="userName"
+          placeholder="Name">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="exampleSelect1">Office Location</label>
+          <select class="form-control" id="dropdownLocation">
+            <option id='room101'>CSE 101</option>
+            <option id='room204'>CSE 204</option>
+            <option id='room404'>CSE 404</option>
+          </select>
+        </fieldset>
+        
+        <fieldset class="form-group">
+          <label for="exampleSelect1">Select food option</label>
+          <select class="form-control" id="dropdownFood">
+            <option id='chineese'>Chineese food</option>
+            <option id='sushi'>Sushi</option>
+            <option id='thai'>Thai</option>
+            <option id='pizza'>Pizza</option>
+          </select>
+        </fieldset>
+      </form>
+      <button class="btn btn-primary" id="submitOrder">Submit</button>
     </div>
-
-
+    
+    <center>
+    <div id="qrcode"></div>
+    </center>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-
-        <!-- build:js(.) scripts/plugins.js -->
+      <!-- build:js(.) scripts/plugins.js -->
         <script src="bower_components/bootstrap/js/affix.js"></script>
         <script src="bower_components/bootstrap/js/alert.js"></script>
         <script src="bower_components/bootstrap/js/dropdown.js"></script>
@@ -65,6 +73,13 @@
         <script src="bower_components/bootstrap/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
+        <script
+        src="scripts/qcode_decoder/build/qcode-decoder.min.js">
+        </script>
+        <script src="scripts/qrcode_creator/qrcode.js"></script>
+
+        <script src="scripts/QRcapture.js"></script>
+        <script src="scripts/submitOrder.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
