@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>jeeves</title>
+    <title>Jeeves</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -20,27 +20,30 @@
    
     <div class="container">
       <div class="header">
-       <h3 class="text-muted">Jeeves</h3>
+       <h3 class="text-muted">jeeves</h3>
       </div>
 
-      <div>
-        <h1>You have a delivery to make!</h1>      
-        </br>
-        <p>
-          <label>Here's the address:</label>
-        </p>
+      <div class="jumbotron">
+        <h1>Scan your QR code!</h1>
+        <div class="sample grid__col--2">
+          <video id="camera" width="500" height="480" src="" autoplay></video>
+          <p>
+          <button class="btn btn-lg btn-success">Capture</button>
+          </p>
+        </div>
+
       </div>
-    </div> 
-    <center>
-    <div id="qrcode"></div>
-    </center>
+    </div>
+
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-      <!-- build:js(.) scripts/plugins.js -->
+
+        <!-- build:js(.) scripts/plugins.js -->
         <script src="bower_components/bootstrap/js/affix.js"></script>
         <script src="bower_components/bootstrap/js/alert.js"></script>
         <script src="bower_components/bootstrap/js/dropdown.js"></script>
@@ -56,10 +59,12 @@
         <script
         src="scripts/qcode_decoder/build/qcode-decoder.min.js">
         </script>
-        <script src="scripts/qrcode_creator/qrcode.js"></script>
-
         <script src="scripts/QRcapture.js"></script>
-        <script src="scripts/submitOrder.js"></script>
+        <script type="text/javascript"
+                src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript"
+                  src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+     
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->

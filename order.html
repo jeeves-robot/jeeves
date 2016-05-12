@@ -50,10 +50,11 @@
       </form>
       <button class="btn btn-primary" id="submitOrder">Submit</button>
     </div>
-    
+
     <center>
     <div id="qrcode"></div>
     </center>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -79,7 +80,12 @@
         <script src="scripts/qrcode_creator/qrcode.js"></script>
 
         <script src="scripts/QRcapture.js"></script>
+        <script type="text/javascript"
+            src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript"
+            src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
         <script src="scripts/submitOrder.js"></script>
+
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
