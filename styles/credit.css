@@ -1,0 +1,8 @@
+/* CSS for Credit Card Payment form */
+.credit-card-box .panel-title {
+    padding: 10px;
+    display: inline;
+    font-size: 20px;
+    font-weight: bold;
+}
+
