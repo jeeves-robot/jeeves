@@ -26,15 +26,8 @@ function processOrder(){
   console.log(location)
   console.log(food)
 
-  var payload = name + "," + location + "," + food;
-  var order = new ROSLIB.Message( {
-      name : name,
-      location : location,
-      food_type : food
-  });
-  order_topic.publish(order);
-
-  // new QRCode(document.getElementById("qrcode"), payload);
+  var newUrl = '/credit.html?name=' + name + '&location=' + location + '&food='+food;
+  document.location.href=newUrl;
 };
 
 

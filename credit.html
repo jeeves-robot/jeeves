@@ -86,11 +86,11 @@
                                     <label for="couponCode">COUPON CODE</label>
                                     <input type="text" class="form-control" name="couponCode" />
                                 </div>
-                            </div>                        
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Place Order</button>
+                                <button class="subscribe btn btn-success btn-lg btn-block" type="button" id="placeOrder">Place Order</button>
                             </div>
                         </div>
                         <div class="row" style="display:none;">
@@ -100,7 +100,7 @@
                         </div>
                     </form>
                 </div>
-            </div>            
+            </div>
    </div>
 
     <center>
@@ -130,7 +130,7 @@
             src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
         <script type="text/javascript"
             src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-
+        <script src="scripts/payOrder.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->

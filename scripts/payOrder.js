@@ -1,0 +1,46 @@
+var ros = new ROSLIB.Ros({
+    url : 'ws://localhost:9090'
+});
+
+ros.on('connection', function() {
+    console.log('Connected to websocket server.');
+});
+
+var order_topic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/jeeves_order',
+    messageType : 'jeeves/Order'
+});
+
+function getParameterByName(name, url) {
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if(!results || !results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+function processOrder(){
+  // TODO: what if there's an '?
+  var url = document.location.href;
+  var name = getParameterByName('name', url);
+  var location = getParameterByName('location', url);
+  var food = getParameterByName('food', url);
+
+  console.log(name);
+  console.log(location);
+  console.log(food);
+
+  var payload = name + "," + location + "," + food;
+  var order = new ROSLIB.Message( {
+      name : name,
+      location : location,
+      food_type : food
+  });
+  order_topic.publish(order);
+
+  // new QRCode(document.getElementById("qrcode"), payload);
+  document.location.href='prepare.html';
+};
+
+var button = document.getElementById("placeOrder").onclick = processOrder;
