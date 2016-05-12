@@ -1,0 +1,8 @@
+{
+  "name": "jeeves",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "react": "^15.0.2"
+  }
+}

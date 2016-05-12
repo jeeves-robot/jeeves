@@ -1,6 +1,7 @@
 var video = document.getElementById('camera');
 
-
+// Temporary hack, set to roomba computer.
+// Robot does not have rossserver.
 var ros = new ROSLIB.Ros({
     url : 'ws://roomba.cs.washington.edu:9090'
 });
@@ -17,16 +18,15 @@ var qr_code_topic = new ROSLIB.Topic({
 
 
 QCodeDecoder().decodeFromCamera(video, function(er,res){
-    console.log('decode from camera called');
-    var decodedMessage = res; 
-    var data = decodedMessage.split(',');
-    var name = data[0];
-    var location = data[1];
-    var foodType = data[2];
-    console.log(res);
-    console.log(name);
-    console.log(location);
-    console.log(foodType);
+    var decodedMessage = res
+    var data = decodedMessage.split(',')
+    var name = data[0]
+    var location = data[1]
+    var foodType = data[2]
+    console.log(res)
+    console.log(name)
+    console.log(location)
+    console.log(foodType)
     var order = new ROSLIB.Message({
         name : name,
         location: location,
