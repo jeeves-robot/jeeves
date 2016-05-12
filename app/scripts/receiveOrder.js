@@ -1,4 +1,4 @@
-console.log('Hello')
+console.log('Hello');
 var ros = new ROSLIB.Ros({
     url : 'ws://localhost:9090'
 });
@@ -53,10 +53,13 @@ var OrderApp = React.createClass({
     },
 
     componentWillMount: function() {
+        var that = this;
         order_topic.subscribe(function(message) {
-            this.state.orders.push(message);
-            this.setState({
-                orders: this.state.orders
+            // THAT because javascript
+            console.log(that)
+            that.state.orders.push(message);
+            that.setState({
+                orders: that.state.orders
             });
         });
     },
@@ -74,4 +77,4 @@ var OrderApp = React.createClass({
     }
 });
 
-React.render(<ChatApp/>, document.body);
+ReactDOM.render(<OrderApp/>, document.body);
