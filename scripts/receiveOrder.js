@@ -17,14 +17,14 @@ var OrderListItem = React.createClass({
 
     render: function() {
         return (
-            <li className='order-list-item'>
-                <span className='order-name'>{this.props.name}</span>
-                <span className='order-location'>{this.props.location}</span>
-                <span className='order-food-type'>{this.props.food_type}</span>
-                <form>
-                    <button>Print</button>
-                </form>
-            </li>
+            <tr className='order-list-item'>
+                <td className='order-name'>{this.props.name}</td>
+                <td className='order-location'>{this.props.location}</td>
+                <td className='order-food-type'>{this.props.food_type}</td>
+                <td>
+                    <button className='btn btn-success btn-sm'>Print QR Code</button>
+                </td>
+            </tr>
         );
     }
 
@@ -40,9 +40,17 @@ var OrderList = React.createClass({
         });
 
         return (
-            <ul className='order-list'>
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Food Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
                 { orderNodes }
-            </ul>
+            </table>
         );
     }
 });
@@ -77,4 +85,4 @@ var OrderApp = React.createClass({
     }
 });
 
-ReactDOM.render(<OrderApp/>, document.body);
+ReactDOM.render(<OrderApp/>, document.getElementById('order-list'));
