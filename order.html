@@ -17,7 +17,7 @@
     <!-- endbuild -->
   </head>
   <body>
-   
+
     <div class="container">
       <div class="header">
        <h3 class="text-muted">Jeeves</h3>
@@ -25,30 +25,33 @@
 
       <form action="">
         <fieldset class="form-group">
-          <label for="exampleInputEmail1">First and Last name</label>
-          <input class="form-control" id="userName"
-          placeholder="Name">
+          <label for="name">Name</label>
+          <input class="form-control" id="name" placeholder="Name">
         </fieldset>
         <fieldset class="form-group">
-          <label for="exampleSelect1">Office Location</label>
+          <label for="phoneNumber">Phone Number</label>
+          <input class="form-control" id="phoneNumber" placeholder="(111) 111-1111">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="dropdownLocation">Office Location</label>
           <select class="form-control" id="dropdownLocation">
             <option id='room101'>CSE 101</option>
             <option id='room204'>CSE 204</option>
             <option id='room404'>CSE 404</option>
           </select>
         </fieldset>
-        
+
         <fieldset class="form-group">
-          <label for="exampleSelect1">Select food option</label>
+          <label for="dropdownFood">What would you like to order?</label>
           <select class="form-control" id="dropdownFood">
-            <option id='chineese'>Chineese food</option>
+            <option id='chinese'>Chinese food</option>
             <option id='sushi'>Sushi</option>
             <option id='thai'>Thai</option>
             <option id='pizza'>Pizza</option>
           </select>
         </fieldset>
       </form>
-      <button class="btn btn-primary" id="submitOrder">Submit</button>
+      <button class="btn btn-primary" id="submitOrder">Place Order</button>
     </div>
 
     <center>
