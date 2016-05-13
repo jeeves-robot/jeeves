@@ -20,6 +20,14 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
+function toggle_visibility(id) {
+  var e = document.getElementById(id);
+  if (e.style.display == 'none')
+    e.style.display = 'block';
+  else
+    e.style.display = 'none';
+}
+
 function processOrder(){
   // TODO: what if there's an '?
   var url = document.location.href;
@@ -39,8 +47,12 @@ function processOrder(){
   });
   order_topic.publish(order);
 
+
   // new QRCode(document.getElementById("qrcode"), payload);
-  document.location.href='prepare.html';
+  // document.location.href='prepare.html';
+  toggle_visibility("payment-form");
+  toggle_visibility("thank-you");
+
 };
 
 var button = document.getElementById("placeOrder").onclick = processOrder;
