@@ -22,7 +22,7 @@
       <div class="header">
        <h3 class="text-muted">Jeeves</h3>
       </div>
-      <h1> Here's a list of your orders!</h1> 
+      <h1> Here's a list of your orders!</h1>
       <div id="order-list">
       </div>
     <div class="print_area" id="qrcode"></div>
@@ -48,9 +48,6 @@
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
         <script src="scripts/qrcode_creator/qrcode.js"></script>
-        <script src="bower_components/react/react.js"></script>
-        <script src="bower_components/react/react-dom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
         <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
         <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
@@ -59,6 +56,6 @@
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <!-- endbuild -->
-        <script type="text/babel" src="scripts/receiveOrder.js"></script>
+        <script type="text/javascript" src="bundle.js"></script>
     </body>
 </html>
