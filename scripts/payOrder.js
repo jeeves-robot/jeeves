@@ -36,12 +36,11 @@ function processOrder(){
   var location = getParameterByName('location', url);
   var food = getParameterByName('food', url);
 
-//  console.log(name);
-//  console.log(location);
-//  console.log(food);
+  console.log(name);
+  console.log(location);
+  console.log(food);
 
-  var orderData = [name, phoneNumber, location, food]
-  var payload = orderData.join()
+
   var order = new ROSLIB.Message( {
       name : name,
       phone_number : phoneNumber,
@@ -49,9 +48,10 @@ function processOrder(){
       food_type : food
   });
   order_topic.publish(order);
-  ros.close();
 
 
+  //var orderData = [name, phoneNumber, location, food]
+  //var payload = orderData.join()
   // new QRCode(document.getElementById("qrcode"), payload);
   // document.location.href='prepare.html';
   toggle_visibility("payment-form");

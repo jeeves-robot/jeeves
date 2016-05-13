@@ -18,9 +18,10 @@ var OrderListItem = React.createClass({
     render: function() {
         return (
             <tr className='order-list-item'>
-                <td className='order-name'>{this.props.name}</td>
-                <td className='order-location'>{this.props.location}</td>
-                <td className='order-food-type'>{this.props.food_type}</td>
+                <td className='order-name'>{this.props.order.name}</td>
+                <td className='order-location'>{this.props.order.location}</td>
+                <td className='order-food-type'>{this.props.order.food_type}</td>
+                <td className='order-phone-number'>{this.props.order.phone_number}</td>
                 <td>
                     <button className='btn btn-success btn-sm'>Print QR Code</button>
                 </td>
@@ -34,8 +35,7 @@ var OrderList = React.createClass({
     render: function() {
         var orderNodes = this.props.orders.map(function (order) {
             return (
-                <OrderListItem name={order.name} location={order.location} food_type={order.food_type}>
-                </OrderListItem>
+                <OrderListItem order={order}></OrderListItem>
             );
         });
 
@@ -46,6 +46,7 @@ var OrderList = React.createClass({
                         <th>Name</th>
                         <th>Location</th>
                         <th>Food Type</th>
+                        <th>Phone Number</th>
                         <th></th>
                     </tr>
                 </thead>
