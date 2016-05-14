@@ -1,20 +1,16 @@
-var twilio = require('twilio');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
 
-TWILIO_ACCOUNT_SID = 'ACe6e5e687abec7cde17af75f1e7a09cb3';
-TWILIO_AUTH_TOKEN = '6ac8584c51b7d15c518046ff03f9efa5';
-TWILIO_PHONE_NUM = '+19712523263'
-
-twilio_client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 firebaseRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 
 var OrderListItem = React.createClass({
 
     send_notification: function () {
-      var message = this.props.order.name + ", your delivery of " + this.props.order.food_type + " is on its way!";
-      //twilio_client.sendMessage( { to:PHONE_NUM, from:TWILIO_PHONE_NUM, body:message }, function( err, data ) {});
+      message = {
+        to: this.props.order.phone_number,
+        body: this.props.order.name + ", your delivery of " + this.props.order.food_type + " is on its way!"
+      }
       console.log(message);
     },
 
