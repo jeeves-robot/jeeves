@@ -2,7 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
 
-firebaseRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
+ordersRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
+notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
 
 var OrderListItem = React.createClass({
 
@@ -12,6 +13,7 @@ var OrderListItem = React.createClass({
         body: this.props.order.name + ", your delivery of " + this.props.order.food_type + " is on its way!"
       }
       console.log(message);
+      notifsRef.push(message);
     },
 
     render: function() {
@@ -63,7 +65,7 @@ var OrderApp = React.createClass({
 
     componentWillMount: function() {
         var that = this;
-        firebaseRef.on('child_added', function(snapshot) {
+        ordersRef.on('child_added', function(snapshot) {
           that.state.orders.push(snapshot.val());
           that.setState({
               orders: that.state.orders
@@ -72,7 +74,8 @@ var OrderApp = React.createClass({
     },
 
     componentWillUnmount: function() {
-        firebaseRef.off();
+        ordersRef.off();
+        notifsRef.off();
     },
 
     render: function() {
