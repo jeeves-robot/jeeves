@@ -1,16 +1,6 @@
-var ros = new ROSLIB.Ros({
-    url : 'ws://localhost:9090'
-});
+var Firebase = require('firebase');
 
-ros.on('connection', function() {
-    console.log('Connected to websocket server.');
-});
-
-var order_topic = new ROSLIB.Topic({
-    ros : ros,
-    name : '/jeeves_order',
-    messageType : 'jeeves/Order'
-});
+firebaseRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 
 function getParameterByName(name, url) {
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -41,14 +31,14 @@ function processOrder(){
   console.log(food);
 
 
-  var order = new ROSLIB.Message( {
+  var order = {
       name : name,
       phone_number : phoneNumber,
       location : location,
       food_type : food
-  });
-  order_topic.publish(order);
-
+  };
+  firebaseRef.push(order);
+  firebaseRef.off()
 
   //var orderData = [name, phoneNumber, location, food]
   //var payload = orderData.join()
