@@ -12,7 +12,7 @@ function processOrder(){
     //  console.log(location)
     //  console.log(food)
 
-    var newUrl = '/credit.html?name=' + name + '&phone=' + phoneNumber + '&location=' + location + '&food='+food;
+    var newUrl = '/payment.html?name=' + name + '&phone=' + phoneNumber + '&location=' + location + '&food='+food;
   document.location.href=newUrl;
 };
 

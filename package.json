@@ -23,7 +23,15 @@
     "grunt-wiredep": "^1.7.0",
     "jshint-stylish": "^0.4.0",
     "load-grunt-tasks": "^0.4.0",
-    "time-grunt": "^0.4.0"
+    "time-grunt": "^0.4.0",
+    "gulp": "~3.9.1",
+    "gulp-util": "~3.0.7",
+    "vinyl-source-stream": "~1.1.0",
+    "gulp-rename": "~1.2.2",
+    "event-stream": "~3.3.2",
+    "glob": "~7.0.3",
+    "browserify": "~13.0.1",
+    "watchify": "~3.7.0"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -31,6 +39,7 @@
   "dependencies": {
     "grunt": "~1.0.1",
     "react-dom": "~15.0.2",
-    "react": "~15.0.2"
+    "react": "~15.0.2",
+    "firebase": "~2.4.2"
   }
 }
