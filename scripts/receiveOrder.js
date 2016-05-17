@@ -37,7 +37,7 @@ var OrderList = React.createClass({
     render: function() {
         var orderNodes = this.props.orders.map(function (order) {
             return (
-                <OrderListItem order={order}></OrderListItem>
+                <OrderListItem order={order} key={order.id}></OrderListItem>
             );
         });
 
@@ -52,7 +52,9 @@ var OrderList = React.createClass({
                         <th></th>
                     </tr>
                 </thead>
-                { orderNodes }
+                <tbody>
+                  { orderNodes }
+                </tbody>
             </table>
         );
     }
@@ -66,7 +68,9 @@ var OrderApp = React.createClass({
     componentWillMount: function() {
         var that = this;
         ordersRef.on('child_added', function(snapshot) {
-          that.state.orders.push(snapshot.val());
+          newOrder = snapshot.val();
+          newOrder['id'] = snapshot.key();
+          that.state.orders.push(newOrder);
           that.setState({
               orders: that.state.orders
           });
