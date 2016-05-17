@@ -7,6 +7,8 @@ var gulp = require('gulp'),
     es = require('event-stream'),
     reactify = require('reactify');
 
+gulp.task('default', ['js']);
+
 gulp.task('js', function(done) {
   glob('./scripts/*.js', function(err, files) {
     if (err) done(err);

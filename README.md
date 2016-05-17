@@ -10,7 +10,7 @@ npm install
 
 #### Build the javascript bundles
 
-gulp js
+gulp
 
 #### Serve the app
 
