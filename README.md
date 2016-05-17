@@ -1,16 +1,21 @@
 # Jeeves
 
-#### How do we build the javascript bundles?
+### Install gulp
+
+npm install -g gulp
+
+### Install NPM modules
+
+npm install
+
+#### Build the javascript bundles
 
 gulp js
 
-#### How do we serve the app?
+#### Serve the app
 
 python -m SimpleHTTPServer 8888
 
-#### How do we send SMS notifications?
+#### Run the notifications server
 
 node send_notifications.js
-
-#### How do we decode QR codes?
-https://cirocosta.github.io/qcode-decoder/
