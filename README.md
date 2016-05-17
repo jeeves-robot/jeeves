@@ -1,10 +1,10 @@
 # Jeeves
 
-### Install gulp
+#### Install gulp
 
 npm install -g gulp
 
-### Install NPM modules
+#### Install NPM modules
 
 npm install
 
