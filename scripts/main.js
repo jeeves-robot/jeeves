@@ -20,17 +20,21 @@ var qr_code_topic = new ROSLIB.Topic({
 QCodeDecoder().decodeFromCamera(video, function(er,res){
     var decodedMessage = res;
     var data = decodedMessage.split(',');
-    var name = data[0];
-    var location = data[1];
-    var foodType = data[2];
-    console.log(res);
-    console.log(name);
-    console.log(location);
-    console.log(foodType);
-    var order = new ROSLIB.Message({
-        name : name,
-        location: location,
-        food_type: foodType
-    });
-    qr_code_topic.publish(order);
+
+    if len(data) == 4:
+        var name = data[0];
+        var phone = data[1];
+        var location = data[2];
+        var foodType = data[3];
+        console.log(res);
+        console.log(name);
+        console.log(location);
+        console.log(foodType);
+        var order = new ROSLIB.Message({
+            name : name,
+            phone_number: phone,
+            location: location,
+            food_type: foodType
+        });
+        qr_code_topic.publish(order);
 });
