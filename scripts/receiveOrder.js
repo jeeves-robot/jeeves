@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
+var QRCode = require('qrcode.react')
 
 ordersRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
@@ -62,7 +63,7 @@ var OrderList = React.createClass({
 
 var OrderApp = React.createClass({
     getInitialState: function() {
-        return { orders: [] };
+        return { orders: [], qr_code: "" };
     },
 
     componentWillMount: function() {
@@ -84,11 +85,10 @@ var OrderApp = React.createClass({
 
     render: function() {
         return (
-            <div className='orderapp'>
-                <OrderList orders={this.state.orders}/>
-            </div>
+          <OrderList orders={this.state.orders}/>
+          <QRCode value=""/>
         );
     }
 });
 
-ReactDOM.render(<OrderApp/>, document.getElementById('order-list'));
+ReactDOM.render(<OrderApp/>, document.getElementById('order-app'));
