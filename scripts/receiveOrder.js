@@ -8,6 +8,16 @@ notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
 
 var OrderListItem = React.createClass({
 
+    onPrintButtonClick: function() {
+      var order = this.props.order;
+      console.log('in on click');
+      var data = [order.name, order.phone_number, order.location, order.food_type];
+      var message = data.join(',');
+      console.log(message);
+      this.props.updateQR(message);
+      send_notification();
+    }
+
     send_notification: function () {
       message = {
         to: this.props.order.phone_number,
@@ -25,7 +35,7 @@ var OrderListItem = React.createClass({
                 <td className='order-food-type'>{this.props.order.food_type}</td>
                 <td className='order-phone-number'>{this.props.order.phone_number}</td>
                 <td>
-                    <button onClick={this.send_notification} className='btn btn-success btn-sm'>Print QR Code</button>
+                    <button onClick={this.onPrintButtonClick} className='btn btn-success btn-sm'>Print QR Code</button>
                 </td>
             </tr>
         );
@@ -38,7 +48,7 @@ var OrderList = React.createClass({
     render: function() {
         var orderNodes = this.props.orders.map(function (order) {
             return (
-                <OrderListItem order={order} key={order.id}></OrderListItem>
+                <OrderListItem order={order} key={order.id} updateQR={this.props.updateQR}></OrderListItem>
             );
         });
 
@@ -66,6 +76,10 @@ var OrderApp = React.createClass({
         return { orders: [], qr_code: "" };
     },
 
+    updateQRCode: function(message) {
+      this.state.qr_code = message
+    },
+
     componentWillMount: function() {
         var that = this;
         ordersRef.on('child_added', function(snapshot) {
@@ -85,8 +99,8 @@ var OrderApp = React.createClass({
 
     render: function() {
         return (
-          <OrderList orders={this.state.orders}/>
-          <QRCode value=""/>
+          <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
+          <QRCode value=this.state.qr_code/>
         );
     }
 });
