@@ -33,17 +33,20 @@ gulp.task('js', function(done) {
                   packageCache: {}
                 })
               .transform(reactify)
-              .plugin(watchify);
+              .plugin(watchify)
+              .on('error', gutil.log);
 
       var bundle = function() {
+        console.log("Bundling " + entry)
         return b.bundle()
+          .on('error', function (err) {
+            gutil.log(gutil.colors.red(err.message));
+            this.emit('end');
+          })
           .pipe(source(entry))
           .pipe(rename({
             extname: '.bundle.js'
             }))
-          .on('error', function(err) {
-            gutil.log(err.message)
-          })
           .pipe(gulp.dest('./bundles'));
       }
 
