@@ -10,6 +10,10 @@ var ros = new ROSLIB.Ros({
     url : 'wss://roomba.cs.washington.edu:9090'
 });
 
+ros.on('error', function(err) {
+    console.log(err);
+});
+
 ros.on('connection', function() {
     console.log('Connected to websocket server.');
 });
@@ -21,15 +25,15 @@ var qr_code_topic = new ROSLIB.Topic({
 });
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
- 
-if (navigator.getUserMedia) {       
+
+if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, handleVideo, videoError);
 }
- 
+
 function handleVideo(stream) {
     video.src = window.URL.createObjectURL(stream);
 }
- 
+
 function videoError(e) {
     console.log(e);
     // do something
@@ -75,4 +79,3 @@ function qr_callback(res) {
           qr_code_topic.publish(order);
       }
 }
-
