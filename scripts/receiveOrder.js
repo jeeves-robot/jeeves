@@ -10,13 +10,11 @@ var OrderListItem = React.createClass({
 
     onPrintButtonClick: function() {
       var order = this.props.order;
-      console.log('in on click');
       var data = [order.name, order.phone_number, order.location, order.food_type];
       var message = data.join(',');
-      console.log(message);
       this.props.updateQR(message);
-      send_notification();
-    }
+      this.send_notification();
+    },
 
     send_notification: function () {
       message = {
@@ -46,9 +44,10 @@ var OrderListItem = React.createClass({
 var OrderList = React.createClass({
 
     render: function() {
+        var that = this;
         var orderNodes = this.props.orders.map(function (order) {
             return (
-                <OrderListItem order={order} key={order.id} updateQR={this.props.updateQR}></OrderListItem>
+                <OrderListItem order={order} key={order.id} updateQR={that.props.updateQR}></OrderListItem>
             );
         });
 
@@ -78,6 +77,10 @@ var OrderApp = React.createClass({
 
     updateQRCode: function(message) {
       this.state.qr_code = message
+      this.setState({
+        orders: this.state.orders,
+        qr_code: this.state.qr_code
+      })
     },
 
     componentWillMount: function() {
@@ -87,7 +90,8 @@ var OrderApp = React.createClass({
           newOrder['id'] = snapshot.key();
           that.state.orders.push(newOrder);
           that.setState({
-              orders: that.state.orders
+              orders: that.state.orders,
+              qr_code: that.state.qr_code
           });
         });
     },
@@ -99,8 +103,10 @@ var OrderApp = React.createClass({
 
     render: function() {
         return (
-          <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
-          <QRCode value=this.state.qr_code/>
+          <div>
+            <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
+            <QRCode value=""/>
+          </div>
         );
     }
 });
