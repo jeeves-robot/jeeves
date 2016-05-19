@@ -3,7 +3,7 @@ var video = document.getElementById('camera');
 // Temporary hack, set to roomba computer.
 // Robot does not have rossserver.
 var ros = new ROSLIB.Ros({
-    url : 'ws://roomba.cs.washington.edu:9090'
+    url : 'wss://roomba.cs.washington.edu:9090'
 });
 
 ros.on('connection', function() {
