@@ -109,7 +109,7 @@ var OrderApp = React.createClass({
               <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
             </div>
             <div className="qr-code">
-              <QRCode value={this.state.qr_code}/>
+              <QRCode value={this.state.qr_code} size={256}/>
             </div>
           </div>
         );
