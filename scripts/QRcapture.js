@@ -36,12 +36,34 @@ function handleVideo(stream) {
 
 function videoError(e) {
     console.log(e);
-    // do something
 }
 
 var reader = new QRCodeReader();
 reader.callback = function (res) {
-  console.log(res);
+  if (!res.startsWith('error')) {
+    console.log(res);
+    var data = res.split(',');
+    if (data.length == 4) {
+        var name = data[0];
+        var phone = data[1];
+        var location = data[2];
+        var foodType = data[3];
+        console.log(res);
+        console.log(name);
+        console.log(location);
+        console.log(foodType);
+        var order = new ROSLIB.Message({
+            name : name,
+            phone_number: phone,
+            location: location,
+            food_type: foodType
+        });
+        qr_code_topic.publish(order);
+      }
+  }
+  else {
+    console.log(res);
+  }
 };
 
 video.addEventListener('play', function () {
@@ -60,22 +82,4 @@ video.addEventListener('play', function () {
 }, 0);
 
 function qr_callback(res) {
-      var data = res.split(',');
-      if (data.length == 4) {
-          var name = data[0];
-          var phone = data[1];
-          var location = data[2];
-          var foodType = data[3];
-          console.log(res);
-          console.log(name);
-          console.log(location);
-          console.log(foodType);
-          var order = new ROSLIB.Message({
-              name : name,
-              phone_number: phone,
-              location: location,
-              food_type: foodType
-          });
-          qr_code_topic.publish(order);
-      }
 }
