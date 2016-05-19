@@ -6,6 +6,10 @@ var ros = new ROSLIB.Ros({
     url : 'wss://roomba.cs.washington.edu:9090'
 });
 
+ros.on('error', function(err) {
+    console.log(err);
+});
+
 ros.on('connection', function() {
     console.log('Connected to websocket server.');
 });
@@ -16,8 +20,10 @@ var qr_code_topic = new ROSLIB.Topic({
     messageType : 'jeeves/Order'
 });
 
-
 QCodeDecoder().decodeFromCamera(video, function(err, res) {
+  if(err) {
+    console.log(err);
+  } else {
       var decodedMessage = res;
       var data = decodedMessage.split(',');
 
@@ -39,4 +45,5 @@ QCodeDecoder().decodeFromCamera(video, function(err, res) {
           qr_code_topic.publish(order);
 
       }
+  }
 });
