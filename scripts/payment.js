@@ -8,7 +8,7 @@ function getParameterByName(name, url) {
       results = regex.exec(url);
   if(!results || !results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));
-};
+}
 
 function toggle_visibility(id) {
   var e = document.getElementById(id);
@@ -38,7 +38,7 @@ function processOrder(){
       food_type : food
   };
   firebaseRef.push(order);
-  firebaseRef.off()
+  firebaseRef.off();
 
   //var orderData = [name, phoneNumber, location, food]
   //var payload = orderData.join()
@@ -47,6 +47,6 @@ function processOrder(){
   toggle_visibility("payment-form");
   toggle_visibility("thank-you");
 
-};
+}
 
 var button = document.getElementById("placeOrder").onclick = processOrder;

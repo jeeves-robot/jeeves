@@ -8,17 +8,24 @@ var gulp = require('gulp'),
     reactify = require('reactify'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
-    react = require('gulp-react');
+    react = require('gulp-react'),
+    stylish = require('jshint-stylish');
 
-gulp.task('default', ['js']);
+function show_error_message(err) {
+  gutil.log(gutil.colors.red(err.message));
+  this.emit('end');
+}
 
-//gulp.watch('./scripts/*.js', ['lint']);
+gulp.task('default', ['js', 'lint']);
+
+gulp.watch('./scripts/*.js', ['lint']);
 
 gulp.task('lint', function(done) {
   return gulp.src('./scripts/*.js')
               .pipe(react())
+              .on('error', show_error_message)
               .pipe(jshint())
-              .pipe(jshint.reporter('default'));
+              .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('js', function(done) {
@@ -33,16 +40,12 @@ gulp.task('js', function(done) {
                   packageCache: {}
                 })
               .transform(reactify)
-              .plugin(watchify)
-              .on('error', gutil.log);
+              .plugin(watchify);
 
       var bundle = function() {
-        console.log("Bundling " + entry)
+        gutil.log("Bundling " + entry)
         return b.bundle()
-          .on('error', function (err) {
-            gutil.log(gutil.colors.red(err.message));
-            this.emit('end');
-          })
+          .on('error', show_error_message)
           .pipe(source(entry))
           .pipe(rename({
             extname: '.bundle.js'

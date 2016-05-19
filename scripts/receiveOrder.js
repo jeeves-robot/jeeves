@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
-var QRCode = require('qrcode.react')
+var QRCode = require('qrcode.react');
 
 ordersRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
@@ -20,7 +20,7 @@ var OrderListItem = React.createClass({
       message = {
         to: this.props.order.phone_number,
         body: this.props.order.name + ", your delivery of " + this.props.order.food_type + " is on its way!"
-      }
+      };
       console.log(message);
       notifsRef.push(message);
     },
@@ -76,18 +76,18 @@ var OrderApp = React.createClass({
     },
 
     updateQRCode: function(message) {
-      this.state.qr_code = message
+      this.state.qr_code = message;
       this.setState({
         orders: this.state.orders,
         qr_code: this.state.qr_code
-      })
+      });
     },
 
     componentWillMount: function() {
         var that = this;
         ordersRef.on('child_added', function(snapshot) {
           newOrder = snapshot.val();
-          newOrder['id'] = snapshot.key();
+          newOrder.id = snapshot.key();
           that.state.orders.push(newOrder);
           that.setState({
               orders: that.state.orders,
