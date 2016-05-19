@@ -14,6 +14,7 @@ var OrderListItem = React.createClass({
       var message = data.join(',');
       this.props.updateQR(message);
       this.send_notification();
+      window.print();
     },
 
     send_notification: function () {
@@ -52,7 +53,7 @@ var OrderList = React.createClass({
         });
 
         return (
-            <table className='table'>
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -104,8 +105,12 @@ var OrderApp = React.createClass({
     render: function() {
         return (
           <div>
-            <OrderList className="no-print" orders={this.state.orders} updateQR={this.updateQRCode}/>
-            <QRCode className="print" value={this.state.qr_code}/>
+            <div className="order-list">
+              <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
+            </div>
+            <div className="qr-code">
+              <QRCode value={this.state.qr_code}/>
+            </div>
           </div>
         );
     }
