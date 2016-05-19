@@ -18,9 +18,6 @@ var qr_code_topic = new ROSLIB.Topic({
 
 
 QCodeDecoder().decodeFromCamera(video, function(err, res) {
-    if (err) {
-      console.log(err);
-    } else {
       var decodedMessage = res;
       var data = decodedMessage.split(',');
 
@@ -42,5 +39,4 @@ QCodeDecoder().decodeFromCamera(video, function(err, res) {
           qr_code_topic.publish(order);
 
       }
-    }
 });
