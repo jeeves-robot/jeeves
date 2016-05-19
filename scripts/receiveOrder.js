@@ -104,8 +104,8 @@ var OrderApp = React.createClass({
     render: function() {
         return (
           <div>
-            <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
-            <QRCode value=""/>
+            <OrderList className="no-print" orders={this.state.orders} updateQR={this.updateQRCode}/>
+            <QRCode className="print" value={this.state.qr_code}/>
           </div>
         );
     }
