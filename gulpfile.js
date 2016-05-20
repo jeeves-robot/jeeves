@@ -74,6 +74,8 @@ gulp.task('bower', function() {
              .pipe(gulp.dest('./public'));
 });
 
+gulp.watch(BOWER_PATH, ['bower']);
+
 gulp.task('move', function() {
   return gulp.src([HTML_PATH, CSS_PATH, FAVICON])
               .pipe(gulp.dest('./public'));

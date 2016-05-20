@@ -2,6 +2,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
 var QRCode = require('qrcode.react');
+var ReactBootstrapTable = require('react-bootstrap-table');
+var BootstrapTable = ReactBootstrapTable.BootstrapTable;
+var TableHeaderColumn = ReactBootstrapTable.TableHeaderColumn;
 
 ordersRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
