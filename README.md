@@ -18,6 +18,8 @@ gulp
 
 #### Serve the app
 
+cd public
+
 python -m SimpleHTTPServer 8888
 
 roslaunch rosbridge_server rosbridge_websocket.launch ssl:=true certfile:=/cert.pem keyfile:=/key.pem authenticate:=false
