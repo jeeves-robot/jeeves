@@ -16,7 +16,9 @@ var BOWER_PATH = './bower_components/**/*.css';
 var HTML_PATH = './pages/*.html';
 var CSS_PATH = './styles/*.css';
 var JS_PATH = './scripts/*.js';
+var LIBS_PATH = './libs/*.js';
 var FAVICON = './favicon.ico';
+var MOVE_PATHS = [HTML_PATH, CSS_PATH, LIBS_PATH, FAVICON]
 
 function show_error_message(err) {
   gutil.log(gutil.colors.red(err.message));
@@ -74,10 +76,11 @@ gulp.task('bower', function() {
              .pipe(gulp.dest('./public'));
 });
 
+
 gulp.task('move', function() {
-  return gulp.src([HTML_PATH, CSS_PATH, FAVICON])
+  return gulp.src(MOVE_PATHS)
               .pipe(gulp.dest('./public'));
 });
 
-gulp.watch([HTML_PATH, CSS_PATH], ['move'])
+gulp.watch(MOVE_PATHS, ['move'])
 
