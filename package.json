@@ -15,7 +15,8 @@
     "jshint-stylish": "^2.2.0",
     "react": "~15.0.2",
     "vinyl-source-stream": "~1.1.0",
-    "watchify": "~3.7.0"
+    "watchify": "~3.7.0",
+    "gulp-flatten": "~0.2.0"
   },
   "engines": {
     "node": ">=0.10.0"

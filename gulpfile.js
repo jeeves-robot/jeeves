@@ -10,12 +10,13 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     react = require('gulp-react'),
     stylish = require('jshint-stylish'),
-    concatCss = require('gulp-concat-css');
+    concatCss = require('gulp-concat-css'),
+    flatten = require('gulp-flatten');
 
 var BOWER_PATH = './bower_components/**/*.css';
-var HTML_PATH = './pages/*.html';
-var CSS_PATH = './styles/*.css';
-var JS_PATH = './scripts/*.js';
+var HTML_PATH = './src/pages/*.html';
+var CSS_PATH = './src/styles/*.css';
+var JS_PATH = './src/scripts/*.js';
 var LIBS_PATH = './libs/*.js';
 var FAVICON = './favicon.ico';
 var MOVE_PATHS = [HTML_PATH, CSS_PATH, LIBS_PATH, FAVICON]
@@ -59,6 +60,7 @@ gulp.task('js', function(done) {
           .pipe(rename({
             extname: '.bundle.js'
             }))
+          .pipe(flatten({ includeParents: -1 }))
           .pipe(gulp.dest('./public'));
       }
 
