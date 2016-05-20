@@ -9,14 +9,19 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
     react = require('gulp-react'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    concatCss = require('gulp-concat-css');
+
+var BOWER_PATH = './bower_components/**/*.css';
+var HTML_PATH = './pages/*.html';
+var CSS_PATH = './styles/*.css';
 
 function show_error_message(err) {
   gutil.log(gutil.colors.red(err.message));
   this.emit('end');
 }
 
-gulp.task('default', ['js', 'lint']);
+gulp.task('default', ['move', 'js', 'lint', 'bower']);
 
 gulp.watch('./scripts/*.js', ['lint']);
 
@@ -50,7 +55,7 @@ gulp.task('js', function(done) {
           .pipe(rename({
             extname: '.bundle.js'
             }))
-          .pipe(gulp.dest('./bundles'));
+          .pipe(gulp.dest('./public'));
       }
 
       b.on('update', bundle);
@@ -60,4 +65,17 @@ gulp.task('js', function(done) {
     es.merge(tasks).on('end', done);
   });
 });
+
+gulp.task('bower', function() {
+  return gulp.src(BOWER_PATH)
+             .pipe(concatCss('bundle.css'))
+             .pipe(gulp.dest('./public'));
+});
+
+gulp.task('move', function() {
+  return gulp.src([HTML_PATH, CSS_PATH])
+              .pipe(gulp.dest('./public'));
+});
+
+gulp.watch([HTML_PATH, CSS_PATH], ['move'])
 

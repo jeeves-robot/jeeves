@@ -3,8 +3,10 @@
   "devDependencies": {
     "browserify": "~13.0.1",
     "event-stream": "~3.3.2",
+    "firebase-tools": "^3.0.0",
     "glob": "~7.0.3",
     "gulp": "~3.9.1",
+    "gulp-concat-css": "^2.3.0",
     "gulp-jshint": "~2.0.1",
     "gulp-react": "~3.1.0",
     "gulp-rename": "~1.2.2",
