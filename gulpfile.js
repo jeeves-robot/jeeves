@@ -15,6 +15,8 @@ var gulp = require('gulp'),
 var BOWER_PATH = './bower_components/**/*.css';
 var HTML_PATH = './pages/*.html';
 var CSS_PATH = './styles/*.css';
+var JS_PATH = './scripts/*.js';
+var FAVICON = './favicon.ico';
 
 function show_error_message(err) {
   gutil.log(gutil.colors.red(err.message));
@@ -23,10 +25,10 @@ function show_error_message(err) {
 
 gulp.task('default', ['move', 'js', 'lint', 'bower']);
 
-gulp.watch('./scripts/*.js', ['lint']);
+gulp.watch(JS_PATH, ['lint']);
 
 gulp.task('lint', function(done) {
-  return gulp.src('./scripts/*.js')
+  return gulp.src(JS_PATH)
               .pipe(react())
               .on('error', show_error_message)
               .pipe(jshint())
@@ -34,7 +36,7 @@ gulp.task('lint', function(done) {
 });
 
 gulp.task('js', function(done) {
-  glob('./scripts/*.js', function(err, files) {
+  glob(JS_PATH, function(err, files) {
     if (err) done(err);
 
     var tasks = files.map(function(entry) {
@@ -73,7 +75,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('move', function() {
-  return gulp.src([HTML_PATH, CSS_PATH])
+  return gulp.src([HTML_PATH, CSS_PATH, FAVICON])
               .pipe(gulp.dest('./public'));
 });
 
