@@ -4,11 +4,14 @@
 
 npm install -g gulp
 
+#### Install Firebase CLI
+npm install -g firebase-tools
+
 #### Install NPM modules
 
 npm install
 
-#### Build the javascript bundles
+#### Build the app
 
 gulp
 
@@ -16,6 +19,11 @@ gulp
 
 python -m SimpleHTTPServer 8888
 roslaunch rosbridge_server rosbridge_websocket.launch ssl:=true certfile:=/cert.pem keyfile:=/key.pem authenticate:=false
+
+#### Deploy the app
+
+cd public
+firebase deploy
 
 #### Run the notifications server
 
