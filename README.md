@@ -25,6 +25,8 @@ roslaunch rosbridge_server rosbridge_websocket.launch ssl:=true certfile:=/cert.
 cd public
 firebase deploy
 
+The app is hosted at https://jeeves-server.firebaseapp.com.
+
 #### Run the notifications server
 
 node send_notifications.js
