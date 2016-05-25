@@ -36,4 +36,4 @@ node send_notifications.js
 
 #### Accepting certificate
 
-https://<computername>:9090
+https://computername:9090
