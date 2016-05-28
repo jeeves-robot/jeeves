@@ -33,3 +33,7 @@ The app is hosted at https://jeeves-server.firebaseapp.com.
 #### Run the notifications server
 
 node send_notifications.js
+
+#### Accepting certificate
+
+https://computername:9090
