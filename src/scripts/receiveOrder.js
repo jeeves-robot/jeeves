@@ -2,6 +2,15 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Firebase = require('firebase');
 var QRCode = require('qrcode.react');
+var injectTapEventPlugin = require("react-tap-event-plugin");
+
+var MaterialUi = require('material-ui');
+var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').default;
+var getMuiTheme = require('material-ui/styles/getMuiTheme').default;
+var lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme').default;
+var muiTheme = getMuiTheme(lightBaseTheme);
+
+injectTapEventPlugin();
 
 ordersRef = new Firebase("https://jeeves-server.firebaseio.com/orders");
 notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
@@ -28,15 +37,15 @@ var OrderListItem = React.createClass({
 
     render: function() {
         return (
-            <tr className='order-list-item'>
-                <td className='order-name'>{this.props.order.name}</td>
-                <td className='order-location'>{this.props.order.location}</td>
-                <td className='order-food-type'>{this.props.order.food_type}</td>
-                <td className='order-phone-number'>{this.props.order.phone_number}</td>
-                <td>
-                    <button onClick={this.onPrintButtonClick} className='btn btn-success btn-sm'>Print QR Code</button>
-                </td>
-            </tr>
+            <MaterialUi.TableRow className='order-list-item'>
+                <MaterialUi.TableRowColumn className='order-name'>{this.props.order.name}</MaterialUi.TableRowColumn>
+                <MaterialUi.TableRowColumn className='order-location'>{this.props.order.location}</MaterialUi.TableRowColumn>
+                <MaterialUi.TableRowColumn className='order-food-type'>{this.props.order.food_type}</MaterialUi.TableRowColumn>
+                <MaterialUi.TableRowColumn className='order-phone-number'>{this.props.order.phone_number}</MaterialUi.TableRowColumn>
+                <MaterialUi.TableRowColumn>
+                    <MaterialUi.RaisedButton onMouseDown={this.onPrintButtonClick} className='btn btn-success btn-sm' label='Print'/>
+                </MaterialUi.TableRowColumn>
+            </MaterialUi.TableRow>
         );
     }
 
@@ -53,20 +62,20 @@ var OrderList = React.createClass({
         });
 
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Food Type</th>
-                        <th>Phone Number</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+            <MaterialUi.Table>
+                <MaterialUi.TableHeader adjustForCheckbox={false} displaySelectAll={false} enableSelectAll={false}>
+                    <MaterialUi.TableRow>
+                        <MaterialUi.TableHeaderColumn>Name</MaterialUi.TableHeaderColumn>
+                        <MaterialUi.TableHeaderColumn>Location</MaterialUi.TableHeaderColumn>
+                        <MaterialUi.TableHeaderColumn>Food Type</MaterialUi.TableHeaderColumn>
+                        <MaterialUi.TableHeaderColumn>Phone Number</MaterialUi.TableHeaderColumn>
+                        <MaterialUi.TableHeaderColumn>Print</MaterialUi.TableHeaderColumn>
+                    </MaterialUi.TableRow>
+                </MaterialUi.TableHeader>
+                <MaterialUi.TableBody>
                   { orderNodes }
-                </tbody>
-            </table>
+                </MaterialUi.TableBody>
+            </MaterialUi.Table>
         );
     }
 });
@@ -104,16 +113,19 @@ var OrderApp = React.createClass({
 
     render: function() {
         return (
-          <div>
-            <div className="order-list">
-              <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
+          <MuiThemeProvider muiTheme={muiTheme}>
+            <div>
+              <div className="order-list">
+                <OrderList orders={this.state.orders} updateQR={this.updateQRCode}/>
+              </div>
+              <div className="qr-code">
+                <QRCode value={this.state.qr_code} size={128}/>
+              </div>
             </div>
-            <div className="qr-code">
-              <QRCode value={this.state.qr_code} size={128}/>
-            </div>
-          </div>
+          </MuiThemeProvider>
         );
-    }
+    },
+
 });
 
 ReactDOM.render(<OrderApp/>, document.getElementById('order-app'));
