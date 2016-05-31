@@ -1,8 +1,18 @@
 var QRCodeReader = require('qrcode-reader');
+var Firebase = require('firebase');
+
+firebaseRef = new Firebase("https://jeeves-server.firebaseio.com/logs");
 
 var video  = document.getElementById('camera');
 var canvas = document.getElementById('qr-canvas');
 var ctx    = canvas.getContext('2d');
+
+function log(message) {
+  console.log(message)
+  firebaseRef.push(message);
+}
+
+log("Loaded delivery page.");
 
 // Temporary hack, set to roomba computer.
 // Robot does not have rossserver.
@@ -11,11 +21,11 @@ var ros = new ROSLIB.Ros({
 });
 
 ros.on('error', function(err) {
-    console.log(err);
+    log(err);
 });
 
 ros.on('connection', function() {
-    console.log('Connected to websocket server.');
+    log('Connected to websocket server.');
 });
 
 var qr_code_topic = new ROSLIB.Topic({
@@ -35,23 +45,23 @@ function handleVideo(stream) {
 }
 
 function videoError(e) {
-    console.log(e);
+    log(e);
 }
 
 var reader = new QRCodeReader();
 reader.callback = function (res) {
   if (!res.startsWith('error')) {
-    console.log(res);
+    log(res);
     var data = res.split(',');
     if (data.length == 4) {
         var name = data[0];
         var phone = data[1];
         var location = data[2];
         var foodType = data[3];
-        console.log(res);
-        console.log(name);
-        console.log(location);
-        console.log(foodType);
+        log(res);
+        log(name);
+        log(location);
+        log(foodType);
         var order = new ROSLIB.Message({
             name : name,
             phone_number: phone,
@@ -62,7 +72,7 @@ reader.callback = function (res) {
       }
   }
   else {
-    console.log(res);
+    //log(res);
   }
 };
 
@@ -81,5 +91,6 @@ video.addEventListener('play', function () {
     })();
 }, 0);
 
-function qr_callback(res) {
-}
+window.onunload = function() {
+  firebaseRef.off();
+};
