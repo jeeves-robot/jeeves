@@ -17,30 +17,41 @@ notifsRef = new Firebase("https://jeeves-server.firebaseio.com/notifs");
 
 var OrderList = React.createClass({
 
-    render: function() {
-        var that = this;
-        var orderNodes = this.props.orders.map(function (order) {
-            return (
-              <MaterialUi.TableRow className='order-list-item' selected={order.id === that.props.selectedOrderID} key={order.id}>
-                  <MaterialUi.TableRowColumn className='order-name'>{order.name}</MaterialUi.TableRowColumn>
-                  <MaterialUi.TableRowColumn className='order-location'>{order.location}</MaterialUi.TableRowColumn>
-                  <MaterialUi.TableRowColumn className='order-food-type'>{order.food_type}</MaterialUi.TableRowColumn>
-                  <MaterialUi.TableRowColumn className='order-phone-number'>{order.phone_number}</MaterialUi.TableRowColumn>
-              </MaterialUi.TableRow>
-            );
-        });
+    renderRow: function(order) {
+        var selected = order.id === this.props.selectedOrderID;
+        return (
+          <MaterialUi.TableRow className='order-list-item' selected={selected} key={order.id}>
+              <MaterialUi.TableRowColumn>{order.name}</MaterialUi.TableRowColumn>
+              <MaterialUi.TableRowColumn>{order.location}</MaterialUi.TableRowColumn>
+              <MaterialUi.TableRowColumn>{order.food_type}</MaterialUi.TableRowColumn>
+              <MaterialUi.TableRowColumn>{order.phone_number}</MaterialUi.TableRowColumn>
+          </MaterialUi.TableRow>
+        );
+    },
 
-        var style = {
+    render: function() {
+        var orderNodes = this.props.orders.map(this.renderRow);
+
+        var buttonStyle = {
           margin: 6,
         };
 
         return (
             <MaterialUi.Table selectable={true} onRowSelection={this.props.updateSelectedOrder}>
-                <MaterialUi.TableHeader adjustForCheckbox={true} displaySelectAll={true} enableSelectAll={false}>
+                <MaterialUi.TableHeader adjustForCheckbox={true}
+                                        displaySelectAll={true} enableSelectAll={false}>
                     <MaterialUi.TableRow>
                       <MaterialUi.TableHeaderColumn colSpan="4" style={{textAlign: 'right'}}>
-                        <MaterialUi.RaisedButton disabled={!this.props.enableButtons} style={style} primary={true} onMouseDown={this.props.onPrintButtonClick} label='Print'/>
-                        <MaterialUi.RaisedButton disabled={!this.props.enableButtons} style={style} secondary={true} onMouseDown={this.props.onArchiveButtonClick} label='Archive'/>
+                        <MaterialUi.RaisedButton disabled={!this.props.enableButtons} 
+                                                 style={buttonStyle}
+                                                 primary={true}
+                                                 onMouseDown={this.props.onPrintButtonClick}
+                                                 label='Print'/>
+                        <MaterialUi.RaisedButton disabled={!this.props.enableButtons} 
+                                                 style={buttonStyle} 
+                                                 secondary={true}
+                                                 onMouseDown={this.props.onArchiveButtonClick}
+                                                 label='Archive'/>
                       </MaterialUi.TableHeaderColumn>
                     </MaterialUi.TableRow>
                     <MaterialUi.TableRow>
@@ -145,7 +156,12 @@ var OrderApp = React.createClass({
           <MuiThemeProvider muiTheme={muiTheme}>
             <div>
               <div className="order-list">
-                <OrderList orders={this.state.orders} onPrintButtonClick={this.onPrintButtonClick} onArchiveButtonClick={this.onArchiveButtonClick} updateSelectedOrder={this.updateSelectedOrder} selectedOrderID={this.state.selectedOrderID} enableButtons={this.state.selectedOrderID !== null}/>
+                <OrderList orders={this.state.orders}
+                           onPrintButtonClick={this.onPrintButtonClick}
+                           onArchiveButtonClick={this.onArchiveButtonClick}
+                           updateSelectedOrder={this.updateSelectedOrder}
+                           selectedOrderID={this.state.selectedOrderID}
+                           enableButtons={this.state.selectedOrderID !== null}/>
               </div>
               <div className="qr-code">
                 <QRCode value={this.state.qr_code} size={128}/>
