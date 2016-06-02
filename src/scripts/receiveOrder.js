@@ -43,7 +43,7 @@ var OrderListItem = React.createClass({
                 <MaterialUi.TableRowColumn className='order-food-type'>{this.props.order.food_type}</MaterialUi.TableRowColumn>
                 <MaterialUi.TableRowColumn className='order-phone-number'>{this.props.order.phone_number}</MaterialUi.TableRowColumn>
                 <MaterialUi.TableRowColumn>
-                    <MaterialUi.RaisedButton onMouseDown={this.onPrintButtonClick} label='Print'/>
+                    <MaterialUi.RaisedButton primary={true} onMouseDown={this.onPrintButtonClick} label='Print'/>
                 </MaterialUi.TableRowColumn>
             </MaterialUi.TableRow>
         );
