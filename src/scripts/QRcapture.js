@@ -8,7 +8,7 @@ var canvas = document.getElementById('qr-canvas');
 var ctx    = canvas.getContext('2d');
 
 function log(message) {
-  console.log(message)
+  console.log(message);
   firebaseRef.push(message);
 }
 
